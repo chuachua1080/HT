@@ -1,0 +1,19 @@
+{% load i18n %}
+  <form id="tt"  action="" method="POST" >{% csrf_token %}
+<fieldset>{%comment%}
+    {% if request.user.is_authenticated and 'next' in request.GET %}
+    <div class="control-group clearfix error">
+      <span class="help-inline"><p>{% trans "You don't have permissions to access:" %}</p>
+        <p><b>{{ request.GET.next }}</b></p>
+        <p>{% trans "Login as different user or go back to" %}
+        <a href="{% url horizon:user_home %}">{% trans "home page" %}</a></p>
+      </span>
+    </div>
+    {% endif %}{%endcomment%}
+  
+{{form.as_p}}
+
+</fieldset></div>    
+<div class="modal-footer"><button type="submit" class="btn btn-primary pull-right">{% trans "Sign In" %}</button>
+<input type="hidden" name="next" value="/hehe/" /></div>
+  </form>
