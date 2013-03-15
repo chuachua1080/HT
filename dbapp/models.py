@@ -6,13 +6,14 @@ class Project(models.Model):
     attrs = models.CharField(max_length=300)
     start_time = models.CharField(max_length=30)
     end_time = models.CharField(max_length=30)
+    tenant = models.CharField(max_length=64)
     
     def __unicode__(self):
         return self.name
 class Topology(models.Model):
     name = models.CharField(max_length=30)
     owner = models.CharField(max_length=30)
-    project = models.ForeignKey(Project)
+    tenant = models.CharField(max_length=64)
     attrs = models.CharField(max_length=300)
     def __unicode__(self):
         return self.name
@@ -22,6 +23,9 @@ class Device(models.Model):
     topology= models.ForeignKey(Topology)
     type=models.CharField(max_length=30)
     pos= models.CharField(max_length=60)
+    image= models.CharField(max_length=36)
+    flavor= models.IntegerField(max_length=11)
+    instanceId= models.CharField(max_length=36)
     def __unicode__(self):
         return self.name
 class OVS(models.Model):
